@@ -1,0 +1,47 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+    <div *ngIf="email && email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+      <div *ngIf="email.errors?.['required']">Email is required.</div>
+      <div *ngIf="email.errors?.['email']">Email must be a valid email address.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+    <div *ngIf="password && password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+      <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+      <div *ngIf="password.errors?.['strongPassword']">Password must be at least 16 characters long and contain a mix of uppercase letters, lowercase letters, numbers, and special characters.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword">
+    <div *ngIf="confirmPassword && confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert alert-danger">
+      <div *ngIf="confirmPassword.errors?.['required']">Confirm Password is required.</div>
+      <div *ngIf="confirmPassword.errors?.['notSame']">Passwords do not match.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" formControlName="firstName">
+    <div *ngIf="firstName && firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+      <div *ngIf="firstName.errors?.['required']">First Name is required.</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" formControlName="lastName">
+    <div *ngIf="lastName && lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+      <div *ngIf="lastName.errors?.['required']">Last Name is required.</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>
