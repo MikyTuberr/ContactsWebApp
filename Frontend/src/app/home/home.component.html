@@ -1,6 +1,45 @@
 <div>
-    <p>home works!</p>
-    <button routerLink="/login">Go to Login</button> 
+  <!-- Przyciski wyświetlane tylko dla niezalogowanego użytkownika -->
+  <div *ngIf="!authService.isLogged()">
+    <button routerLink="/login">Go to Login</button>
     <button routerLink="/register">Go to Register</button>
   </div>
-  
+
+  <!-- Wyświetlanie listy filmów -->
+  <h2>Movies List</h2>
+  <ul>
+    <li *ngFor="let movie of movies">{{ movie.id }}, {{ movie.releaseDate }} , {{ movie.title }} , {{ movie.description }}</li>
+  </ul>
+
+  <!-- Przyciski wyświetlane tylko dla zalogowanego użytkownika -->
+  <div *ngIf="authService.isLogged()">
+    <div>
+      <input type="number" [(ngModel)]="movieId" placeholder="Enter movie ID">
+      <button (click)="getMovie(movieId)">Get Movie</button>
+    </div>    
+
+    <!-- Form for adding a new movie -->
+    <div>
+      <input type="text" [(ngModel)]="newMovie.title" placeholder="Enter movie title">
+      <input type="text" [(ngModel)]="newMovie.description" placeholder="Enter movie description">
+      <input type="date" [(ngModel)]="newMovie.releaseDate" placeholder="Enter release date">
+      <button (click)="addMovie(newMovie)">Add Movie</button>
+    </div>
+
+    <!-- Form for editing an existing movie -->
+    <div *ngIf="selectedMovie">
+      <input type="text" [(ngModel)]="selectedMovie.title" placeholder="Enter movie title">
+      <input type="text" [(ngModel)]="selectedMovie.description" placeholder="Enter movie description">
+      <input type="date" [(ngModel)]="selectedMovie.releaseDate" placeholder="Enter release date">
+      <button (click)="editMovie(selectedMovie.id, selectedMovie)">Edit Movie</button>
+    </div>
+
+    <div>
+      <input type="number" [(ngModel)]="deleteId" placeholder="Enter movie ID">
+      <button (click)="deleteMovie(deleteId)">Delete Movie</button>
+    </div>    
+  </div>
+
+  <!-- Wyświetlanie przycisku Logout tylko dla zalogowanego użytkownika -->
+  <button (click)="logout()" *ngIf="authService.isLogged()">Logout</button>
+</div>

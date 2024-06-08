@@ -30,8 +30,20 @@ export class AuthService {
     return null;
   }
 
+  isLogged(): boolean {
+    const token = localStorage.getItem('token');
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      return true;
+    }
+    return false;
+  }
+
   isAdmin(): boolean {
     const roles = this.getRole();
     return roles ? roles.includes('admin') : false;
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
   }
 }
