@@ -13,6 +13,6 @@ namespace ContactsWebApp.Data
 
         }
 
-        public DbSet<Movie> Movies { get; set; } = null!;
+        public DbSet<Contact> Contacts { get; set; } = null!;
     }
 }

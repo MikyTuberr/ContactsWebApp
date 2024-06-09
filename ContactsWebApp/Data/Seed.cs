@@ -7,7 +7,7 @@ namespace ContactsWebApp.Data
 {
     public class Seed
     {
-        public static void SeedMovies(IApplicationBuilder builder)
+        /*public static void SeedMovies(IApplicationBuilder builder)
         {
             using (var scope = builder.ApplicationServices.CreateScope()) // create scope 
             {
@@ -24,7 +24,7 @@ namespace ContactsWebApp.Data
                     dbContext.SaveChanges();
                 }
             }
-        }
+        }*/
 
         public static async Task SeedRoles(IApplicationBuilder builder)
         {
