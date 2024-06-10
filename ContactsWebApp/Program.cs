@@ -81,7 +81,7 @@ app.UseCors("DefaultPolicy");
 
 // Seed data
 //Seed.SeedMovies(app);
-await Seed.SeedRoles(app);
+//await Seed.SeedRoles(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

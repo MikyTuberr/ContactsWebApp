@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ContactsWebApp.Services
 {
@@ -24,6 +25,33 @@ namespace ContactsWebApp.Services
             if (registerDto.FirstName == null) { return false; }
             if (registerDto.LastName == null) { return false; }
             return true;
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return false;
+
+            // Regex for validation of email
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
+
+            // Validate email
+            return Regex.IsMatch(email, emailPattern, RegexOptions.IgnoreCase);
+        }
+
+        public bool IsPasswordStrong(string password)
+        {
+            // Check if password is longer than 16 
+            if (string.IsNullOrEmpty(password) || password.Length < 16)
+                return false;
+
+            // Check if passowrd contains uppercase letter, lowercase letter, number and special character
+            bool containsSpecialCharacters = Regex.IsMatch(password, @"[!@#$%^&*()_+\-=\[\]{};':""\\|,.<>\/?]+");
+            bool containsUpperCase = Regex.IsMatch(password, @"[A-Z]+");
+            bool containsLowerCase = Regex.IsMatch(password, @"[a-z]+");
+            bool containsNumber = Regex.IsMatch(password, @"[0-9]+");
+
+            return containsSpecialCharacters && containsUpperCase && containsLowerCase && containsNumber;
         }
 
         // Generate JWT token for the user

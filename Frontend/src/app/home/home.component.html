@@ -1,17 +1,11 @@
 <div>
-  <!-- Przyciski wyświetlane tylko dla niezalogowanego użytkownika -->
-  <div *ngIf="!authService.isLogged()">
-    <button routerLink="/login">Go to Login</button>
-    <button routerLink="/register">Go to Register</button>
-  </div>
-
-  <!-- Wyświetlanie listy filmów -->
-  <h2>Movies List</h2>
+  <!-- Showing the list of contacts -->
+  <h2>Contacts List</h2>
   <ul>
     <li *ngFor="let movie of movies">{{ movie.id }}, {{ movie.releaseDate }} , {{ movie.title }} , {{ movie.description }}</li>
   </ul>
 
-  <!-- Przyciski wyświetlane tylko dla zalogowanego użytkownika -->
+  <!-- Showed only for logged user -->
   <div *ngIf="authService.isLogged()">
     <div>
       <input type="number" [(ngModel)]="movieId" placeholder="Enter movie ID">
@@ -39,7 +33,4 @@
       <button (click)="deleteMovie(deleteId)">Delete Movie</button>
     </div>    
   </div>
-
-  <!-- Wyświetlanie przycisku Logout tylko dla zalogowanego użytkownika -->
-  <button (click)="logout()" *ngIf="authService.isLogged()">Logout</button>
 </div>

@@ -3,6 +3,7 @@ using ContactsWebApp.Models;
 using ContactsWebApp.Repositories;
 using ContactsWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -27,10 +28,17 @@ public class AuthController : ControllerBase
         if (!ModelState.IsValid) { return BadRequest(ModelState); }
 
         // Ensure that required fields are not null
-        if(!_authService.IsRegisterModelValid(model)) { return BadRequest("Some data is null."); }
+        if (!_authService.IsRegisterModelValid(model)) { return BadRequest("Some data is null."); }
+
+        // Check if email is valid
+        if (!_authService.IsValidEmail(model.Email)) { return BadRequest("Email must be a valid email address."); };
+
+        // Check if password must has at least 16 characters long and contain a mix of uppercase letters, lowercase letters, numbers, and special characters.
+        if (!_authService.IsPasswordStrong(model.Password)) 
+        { return BadRequest("Password must be at least 16 characters long and contain a mix of uppercase letters, lowercase letters, numbers, and special characters."); };
 
         // Check if user with the same email already exists
-        if(await _authRepository.IsEmailUsedAsync(model.Email)) { return BadRequest("Email is already used."); }
+        if (await _authRepository.IsEmailUsedAsync(model.Email)) { return BadRequest("Email is already used."); }
 
         // Create AppUser model
         var newUser = new AppUser()

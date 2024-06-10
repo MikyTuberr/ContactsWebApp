@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { environment } from './environments/environment';
+import { HeaderComponent } from './header/header.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -24,7 +25,8 @@ export function tokenGetter() {
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent
   ],
   imports: [
     HttpClientModule,

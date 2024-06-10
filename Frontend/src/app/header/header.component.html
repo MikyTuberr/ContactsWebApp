@@ -1,0 +1,8 @@
+<header>
+    <div>
+        <button routerLink="/home">Main Page</button>
+        <button *ngIf="!authService.isLogged()" routerLink="/login">Login</button>
+        <button *ngIf="!authService.isLogged()" routerLink="/register">Register</button>
+        <button (click)="logout()" *ngIf="authService.isLogged()">Logout</button>
+    </div>
+</header>
