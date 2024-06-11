@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { MovieService } from '../services/movie.service';
-import { Movie } from '../models/movie';
-import { MovieDto } from '../models/movie.dto';
-import { Router } from '@angular/router';
+import { ContactsService } from '../services/contacts.service';
+import { Contact } from '../models/contact';
 
 @Component({
   selector: 'app-home',
@@ -11,54 +9,53 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  movies: Movie[] = [];
-  movieId: number;
+  contacts: Contact[] = [];
+  contactId: number;
   deleteId: number;
-  selectedMovie: Movie | null;
-  newMovie: MovieDto;
+  selectedContact: Contact | null;
+  newContact: Contact;
 
   constructor(
     private _authService: AuthService,
-    private movieService: MovieService,
-    private router: Router
+    private contactService: ContactsService,
   ) {
-    this.movieId = 0;
+    this.contactId = 0;
     this.deleteId = 0;
-    this.selectedMovie = null;
-    this.newMovie = new MovieDto(new Date, -1, "", "");
+    this.selectedContact = null;
+    this.newContact = new Contact();
   }
 
   ngOnInit(): void {
-    this.getMovies();
+    this.getContacts();
   }
 
-  getMovies(): void {
-    this.movieService.getMovies().subscribe(movies => {
-      this.movies = movies;
+  getContacts(): void {
+    this.contactService.getContacts().subscribe(contacts => {
+      this.contacts = contacts;
     });
   }
 
-  getMovie(id: number): void {
-    this.movieService.getMovie(id).subscribe(movie => {
-      this.selectedMovie = movie;
+  getContact(id: number): void {
+    this.contactService.getContact(id).subscribe(contact => {
+      this.selectedContact = contact;
     });
   }
 
-  addMovie(movie: MovieDto): void {
-    this.movieService.addMovie(movie).subscribe(newMovie => {
-      this.movies.push(newMovie);
+  addContact(contact: Contact): void {
+    this.contactService.addContact(contact).subscribe(newContact => {
+      this.contacts.push(newContact);
     });
   }
 
-  editMovie(id: number, movie: Movie): void {
-    this.movieService.editMovie(id, movie).subscribe(() => {
-      this.getMovies();
+  editContact(id: number, contact: Contact): void {
+    this.contactService.editContact(id, contact).subscribe(() => {
+      this.getContacts();
     });
   }
 
-  deleteMovie(id: number): void {
-    this.movieService.deleteMovie(id).subscribe(() => {
-      this.movies = this.movies.filter(movie => movie.id !== id);
+  deleteContact(id: number): void {
+    this.contactService.deleteContact(id).subscribe(() => {
+      this.contacts = this.contacts.filter(contact => contact.id !== id);
     });
   }
 
