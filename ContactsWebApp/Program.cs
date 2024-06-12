@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(options =>
 
 // Inject repositories and services
 builder.Services.AddScoped<IContactsRepository, ContactsRepository>();
+builder.Services.AddScoped<IContactsService, ContactsService>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
@@ -80,7 +81,7 @@ var app = builder.Build();
 app.UseCors("DefaultPolicy");
 
 // Seed data
-//Seed.SeedMovies(app);
+Seed.SeedContacts(app);
 //await Seed.SeedRoles(app);
 
 // Configure the HTTP request pipeline.

@@ -4,6 +4,7 @@ namespace ContactsWebApp.Repositories
 {
     public interface IContactsRepository 
     {
+        public Task<bool> IsEmailUsedAsync(string email); // check if email is already used
         public Task<List<Contact>?> GetAllAsync(); // get all contacts collection
         public Task<Contact?> GetAsync(int id); // get contact by id
 

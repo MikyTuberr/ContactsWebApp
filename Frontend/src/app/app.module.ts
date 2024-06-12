@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +13,10 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { environment } from './environments/environment';
 import { HeaderComponent } from './header/header.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { ContactEditPageComponent } from './contact-edit-page/contact-edit-page.component';
+import { ContactAddPageComponent } from './contact-add-page/contact-add-page.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -26,7 +29,10 @@ export function tokenGetter() {
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContactPageComponent,
+    ContactEditPageComponent,
+    ContactAddPageComponent,
   ],
   imports: [
     HttpClientModule,
@@ -42,7 +48,10 @@ export function tokenGetter() {
       }
     })
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

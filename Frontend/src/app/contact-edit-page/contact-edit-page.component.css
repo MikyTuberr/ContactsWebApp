@@ -1,19 +1,18 @@
 /* Style for the form container */
-.register-form {
+.contact-form {
     max-width: 400px;
     margin: 0 auto;
   }
   
   /* Style for form labels */
-  .register-form label {
+  .contact-form label {
     display: block;
     margin-bottom: 5px;
   }
   
   /* Style for form inputs */
-  .register-form input[type="text"],
-  .register-form input[type="email"],
-  .register-form input[type="password"] {
+  .contact-form input,
+  .contact-form select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -33,7 +32,7 @@
   }
   
   /* Style for submit button */
-  .register-form button[type="submit"] {
+  .contact-form button[type="submit"] {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;
@@ -42,13 +41,12 @@
     cursor: pointer;
   }
   
-  .register-form button[type="submit"]:hover {
+  .contact-form button[type="submit"]:hover {
     background-color: #0056b3;
   }
   
   /* Disable style for disabled button */
-  .register-form button[type="submit"]:disabled {
+  .contact-form button[type="submit"]:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
   }
-  

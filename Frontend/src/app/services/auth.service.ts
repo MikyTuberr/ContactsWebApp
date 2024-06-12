@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 
@@ -32,10 +33,7 @@ export class AuthService {
 
   isLogged(): boolean {
     const token = localStorage.getItem('token');
-    if (token && !this.jwtHelper.isTokenExpired(token)) {
-      return true;
-    }
-    return false;
+    return token !== null && !this.jwtHelper.isTokenExpired(token);
   }
 
   isAdmin(): boolean {

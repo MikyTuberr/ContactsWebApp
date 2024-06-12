@@ -10,53 +10,31 @@ import { Contact } from '../models/contact';
 })
 export class HomeComponent implements OnInit {
   contacts: Contact[] = [];
-  contactId: number;
-  deleteId: number;
-  selectedContact: Contact | null;
-  newContact: Contact;
 
   constructor(
     private _authService: AuthService,
-    private contactService: ContactsService,
-  ) {
-    this.contactId = 0;
-    this.deleteId = 0;
-    this.selectedContact = null;
-    this.newContact = new Contact();
-  }
+    private _contactService: ContactsService,
+  ) {}
 
   ngOnInit(): void {
     this.getContacts();
   }
 
   getContacts(): void {
-    this.contactService.getContacts().subscribe(contacts => {
-      this.contacts = contacts;
-    });
+    this._contactService.getContacts().subscribe(
+      contacts => {
+        this.contacts = contacts;
+      }
+    );
   }
 
-  getContact(id: number): void {
-    this.contactService.getContact(id).subscribe(contact => {
-      this.selectedContact = contact;
-    });
-  }
-
-  addContact(contact: Contact): void {
-    this.contactService.addContact(contact).subscribe(newContact => {
-      this.contacts.push(newContact);
-    });
-  }
-
-  editContact(id: number, contact: Contact): void {
-    this.contactService.editContact(id, contact).subscribe(() => {
-      this.getContacts();
-    });
-  }
-
-  deleteContact(id: number): void {
-    this.contactService.deleteContact(id).subscribe(() => {
-      this.contacts = this.contacts.filter(contact => contact.id !== id);
-    });
+  deleteContact(id?: number): void {
+    this._contactService.deleteContact(id).subscribe(
+      response => {
+        console.log("Succesfully deleted contact!", response);
+        this.contacts = this.contacts.filter(contact => contact.id !== id);
+      }
+    );
   }
 
   // Getters

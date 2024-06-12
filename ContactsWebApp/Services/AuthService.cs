@@ -20,10 +20,11 @@ namespace ContactsWebApp.Services
 
         public bool IsRegisterModelValid(RegisterDto registerDto)
         {
-            if (registerDto.Email == null) { return false; }
-            if (registerDto.Password == null) { return false; }
-            if (registerDto.FirstName == null) { return false; }
-            if (registerDto.LastName == null) { return false; }
+            if (registerDto.Email == null ||
+                registerDto.Password == null ||
+                registerDto.FirstName == null ||
+                registerDto.LastName == null) 
+            {  return false; }
             return true;
         }
 

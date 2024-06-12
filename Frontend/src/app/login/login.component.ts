@@ -29,13 +29,13 @@ export class LoginComponent {
       const credentials = this.loginForm.value;
 
       this.authService.login(credentials).subscribe(
-        (response : any) => {
+        response => {
           // If login is successful, we can redirect the user or perform other actions
           console.log('Login successful!');
           localStorage.setItem('token', response.token);
           this.router.navigate(['/home']);
         },
-        (error) => {
+        error => {
           // If login fails, handle the error and display an appropriate message to the user
           console.error('Login error:', error);
           this.loginError = error.message || 'An error occurred during login. Please try again later.';

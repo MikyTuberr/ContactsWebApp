@@ -4,5 +4,6 @@
         <button *ngIf="!authService.isLogged()" routerLink="/login">Login</button>
         <button *ngIf="!authService.isLogged()" routerLink="/register">Register</button>
         <button (click)="logout()" *ngIf="authService.isLogged()">Logout</button>
+        <button *ngIf="authService.isLogged()" routerLink="/add">Add new contact</button>
     </div>
 </header>

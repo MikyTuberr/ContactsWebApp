@@ -1,5 +1,5 @@
 export class Contact {
-  id?: number;
+  id?: number; // optional for new contacts
   name: string;
   lastName: string;
   email: string;
@@ -17,7 +17,6 @@ export class Contact {
       category: string = "",
       phoneNumber: string = "",
       birthDate: Date = new Date(),
-      subCategory?: string,
       id?: number
   ) {
       this.id = id;
@@ -28,6 +27,5 @@ export class Contact {
       this.category = category;
       this.phoneNumber = phoneNumber;
       this.birthDate = birthDate;
-      this.subCategory = subCategory;
   }
 }

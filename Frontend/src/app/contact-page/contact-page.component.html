@@ -1,0 +1,38 @@
+<div class="contact-container" *ngIf="contact">
+    <h2>Contact Page</h2>
+    <ul>
+      <li>
+        <label for="name">Name:</label>
+        <span>{{ contact.name }}</span>
+      </li>
+      <li>
+        <label for="lastName">Last Name:</label>
+        <span>{{ contact.lastName }}</span>
+      </li>
+      <li>
+        <label for="email">Email:</label>
+        <span>{{ contact.email }}</span>
+      </li>
+      <li>
+        <label for="password">Password:</label>
+        <span>{{ contact.password }}</span>
+      </li>
+      <li>
+        <label for="category">Category:</label>
+        <span>{{ contact.category }}</span>
+      </li>
+      <li>
+        <label for="subCategory">Subcategory:</label>
+        <span>{{ contact.subCategory }}</span>
+      </li>
+      <li>
+        <label for="phoneNumber">Phone Number:</label>
+        <span>{{ contact.phoneNumber }}</span>
+      </li>
+      <li>
+        <label for="birthDate">Birth Date:</label>
+        <span>{{ contact.birthDate | date }}</span>
+      </li>
+    </ul>
+  </div>
+  

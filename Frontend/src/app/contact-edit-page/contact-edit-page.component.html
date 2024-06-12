@@ -1,0 +1,59 @@
+
+<div *ngIf="contact">
+  <form class="contact-form" [formGroup]="editForm" (ngSubmit)="editContact()">
+    <h2>Edit Contact</h2>
+    <div>
+      <label for="name">Name:</label>
+      <input id="name" [(ngModel)]="contact.name" formControlName="name" />
+    </div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" [(ngModel)]="contact.lastName" formControlName="lastName" />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="contact.email" formControlName="email" />
+      <div *ngIf="email && email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.['required']">Email is required.</div>
+        <div *ngIf="email.errors?.['email']">Email must be a valid email address.</div>
+      </div>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" [(ngModel)]="contact.password" type="password" formControlName="password" />
+      <div *ngIf="password && password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors?.['required']">Password is required.</div>
+        <div *ngIf="password.errors?.['minlength']">Password must be at least 16 characters long.</div>
+        <div *ngIf="password.errors?.['strongPassword']">Password must be at least 16 characters long and contain a mix of uppercase letters, lowercase letters, numbers, and special characters.</div>
+      </div>
+    </div>
+    <div>
+      <label for="category">Category:</label>
+      <select id="category" formControlName="category" [(ngModel)]="contact.category">
+        <option value="business">business</option>
+        <option value="private">private</option>
+        <option value="other">other</option>
+      </select>
+    </div>    
+    <div *ngIf="editForm.get('category')?.value === 'other'">
+      <label for="subCategory">Subcategory:</label>
+      <input id="subCategory" formControlName="subCategory" />
+    </div>
+    <div *ngIf="editForm.get('category')?.value === 'business'">
+      <label for="subCategory">Subcategory:</label>
+      <select id="subCategory" formControlName="subCategory" [(ngModel)]="contact.subCategory">
+        <option value="boss">boss</option>
+        <option value="client">client</option>
+      </select>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input id="phoneNumber" [(ngModel)]="contact.phoneNumber" formControlName="phoneNumber" />
+    </div>
+    <div>
+      <label for="birthDate">Birth Date:</label>
+      <input id="birthDate" [(ngModel)]="contact.birthDate" type="date" formControlName="birthDate" />
+    </div>
+    <button type="submit" [disabled]="editForm.invalid">Save</button>
+  </form>
+</div>

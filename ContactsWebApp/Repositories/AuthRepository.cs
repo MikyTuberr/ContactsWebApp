@@ -19,7 +19,7 @@ namespace ContactsWebApp.Repositories
         {
             var newUserResponse = await _userManager.CreateAsync(newUser, password); // create new user
 
-            if (newUserResponse.Succeeded)
+            /*if (newUserResponse.Succeeded)
             {
                 var addToRoleResult = await _userManager.AddToRoleAsync(newUser, UserRoles.User); // assign role to user as normal user
                 if (!addToRoleResult.Succeeded)
@@ -27,7 +27,7 @@ namespace ContactsWebApp.Repositories
                     await _userManager.DeleteAsync(newUser); // if adding role was unsucessful delete new user
                     return false;
                 }
-            }
+            }*/
             return true;
         }
 

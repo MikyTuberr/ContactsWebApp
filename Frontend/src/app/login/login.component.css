@@ -1,3 +1,66 @@
-.alert {
-    color: red;
-}
+/* Style for the login container */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  /* Style for form labels */
+  .login-form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Style for form inputs */
+  .login-form input[type="email"],
+  .login-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for error messages */
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
+  /* Style for submit button */
+  .login-form button[type="submit"] {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Disable style for disabled button */
+  .login-form button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Style for error message */
+  .error-message {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  

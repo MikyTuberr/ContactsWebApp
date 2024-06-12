@@ -13,6 +13,27 @@ namespace ContactsWebApp.Repositories
             _context = context;
         }
 
+        public async Task<bool> IsEmailUsedAsync(string email)
+        {
+            if (_context.Contacts == null) // check if "Contacts" table isn't empty
+            {
+                return false;
+            }
+
+            // Check if the email exists in the Contacts table
+            var existingContactWithEmail = await _context.Contacts
+                .FirstOrDefaultAsync(c => c.Email == email);
+
+            // If email is already used by another contact, return true
+            if (existingContactWithEmail != null)
+            {
+                return true;
+            }
+
+            // If no entity uses the email, return false
+            return false;
+        }
+
         public async Task<int?> AddAsync(Contact contact)
         {
             if (_context.Contacts == null) // check if "Contacts" table isn't empty

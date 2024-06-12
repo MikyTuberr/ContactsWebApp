@@ -1,36 +1,30 @@
-<div>
+<div class="contacts-container">
   <!-- Showing the list of contacts -->
   <h2>Contacts List</h2>
   <ul>
-    <li *ngFor="let movie of movies">{{ movie.id }}, {{ movie.releaseDate }} , {{ movie.title }} , {{ movie.description }}</li>
+    <li *ngFor="let contact of contacts">
+      <div>
+          <div>
+            Name: <span>{{contact.name}} </span>
+          </div>
+          <div>
+            Last Name: <span>{{contact.lastName}}</span>
+          </div>
+          <div>
+            Email: <span>{{contact.email}}</span>
+          </div>
+          <div>
+            Category: <span>{{contact.category}}</span>
+          </div>
+          <div>
+            Phone Number: <span>{{contact.phoneNumber}}</span>
+          </div>
+      </div>
+      <div *ngIf="authService.isLogged()">
+        <button routerLink="/edit/{{contact.id}}">Edit</button>
+        <button (click)="deleteContact(contact.id)">Delete</button>
+        <button routerLink="/contact/{{contact.id}}">Details</button>
+      </div>
+    </li>
   </ul>
-
-  <!-- Showed only for logged user -->
-  <div *ngIf="authService.isLogged()">
-    <div>
-      <input type="number" [(ngModel)]="movieId" placeholder="Enter movie ID">
-      <button (click)="getMovie(movieId)">Get Movie</button>
-    </div>    
-
-    <!-- Form for adding a new movie -->
-    <div>
-      <input type="text" [(ngModel)]="newMovie.title" placeholder="Enter movie title">
-      <input type="text" [(ngModel)]="newMovie.description" placeholder="Enter movie description">
-      <input type="date" [(ngModel)]="newMovie.releaseDate" placeholder="Enter release date">
-      <button (click)="addMovie(newMovie)">Add Movie</button>
-    </div>
-
-    <!-- Form for editing an existing movie -->
-    <div *ngIf="selectedMovie">
-      <input type="text" [(ngModel)]="selectedMovie.title" placeholder="Enter movie title">
-      <input type="text" [(ngModel)]="selectedMovie.description" placeholder="Enter movie description">
-      <input type="date" [(ngModel)]="selectedMovie.releaseDate" placeholder="Enter release date">
-      <button (click)="editMovie(selectedMovie.id, selectedMovie)">Edit Movie</button>
-    </div>
-
-    <div>
-      <input type="number" [(ngModel)]="deleteId" placeholder="Enter movie ID">
-      <button (click)="deleteMovie(deleteId)">Delete Movie</button>
-    </div>    
-  </div>
 </div>
