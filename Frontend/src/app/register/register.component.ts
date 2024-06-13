@@ -11,18 +11,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
-  registrationError: string | null = null;
+  registerForm: FormGroup; // form for registration
+  registrationError: string | null = null; // error string
 
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthService,
     private router: Router 
   ) {
-    // Initialization of password Control
+    // initialization of password control
     let passwordControl: FormControl = new FormControl<string>('', [Validators.required, strongPasswordValidator()]);
 
-    // Create form
+    // initialize registration form
     this.registerForm = this.formBuilder.group({
       email: new FormControl<string>('', [Validators.required, Validators.email]),
       password: passwordControl,

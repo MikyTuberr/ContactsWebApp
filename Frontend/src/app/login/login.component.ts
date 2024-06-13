@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  loginForm: FormGroup; // form for login
   loginError: string | null = null; // Variable to store login error
 
   constructor(
@@ -18,6 +18,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
+    // initialize form for login
     this.loginForm = this.formBuilder.group({
       email: new FormControl<string>('', [Validators.required, Validators.email]),
       password: new FormControl<string>('', Validators.required)

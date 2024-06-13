@@ -9,8 +9,8 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private jwtHelper = new JwtHelperService();
-  private apiUrl = environment.apiUrl;
+  private jwtHelper = new JwtHelperService(); // jwt helper
+  private apiUrl = environment.apiUrl; // api url
 
   constructor(private http: HttpClient) {}
 
@@ -32,12 +32,12 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); // check jwt token
     return token !== null && !this.jwtHelper.isTokenExpired(token);
   }
 
   isAdmin(): boolean {
-    const roles = this.getRole();
+    const roles = this.getRole(); 
     return roles ? roles.includes('admin') : false;
   }
 

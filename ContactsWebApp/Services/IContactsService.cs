@@ -4,6 +4,6 @@ namespace ContactsWebApp.Services
 {
     public interface IContactsService
     {
-        public bool IsContactsModelValid(ContactDto contactDto);
+        public bool IsContactsModelValid(ContactDto contactDto); // check if contacts model is valid
     }
 }

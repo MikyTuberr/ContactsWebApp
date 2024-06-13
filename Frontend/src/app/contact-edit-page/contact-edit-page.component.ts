@@ -12,9 +12,9 @@ import { minimumAgeValidator } from '../validators/minimum.age.validator';
   styleUrls: ['./contact-edit-page.component.css']
 })
 export class ContactEditPageComponent implements OnInit {
-  contact!: Contact;
-  id! : number;
-  editForm: FormGroup;
+  contact!: Contact; // contact for edit
+  id! : number; // id of contact for edit
+  editForm: FormGroup; // form for contact edition
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -23,24 +23,29 @@ export class ContactEditPageComponent implements OnInit {
     private _contactsService: ContactsService,
   ) 
   {
+    // initialize form
     this.editForm = this._formBuilder.group({
       name: new FormControl<string>('', Validators.required),
       lastName: new FormControl<string>('', Validators.required),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
-      password: new FormControl<string>('', [Validators.required, strongPasswordValidator()]),
+      password: new FormControl<string>('', [Validators.required, strongPasswordValidator()]),  // pass strongPasswordValidator
       category: new FormControl<string>('', Validators.required),
       subCategory: new FormControl<string>(''),
       phoneNumber: new FormControl<string>('', Validators.required),
-      birthDate: new FormControl<Date>(new Date(), [Validators.required, minimumAgeValidator(13)])
+      birthDate: new FormControl<Date>(new Date(), [Validators.required, minimumAgeValidator(13)]) // pass minimumAgeValidator with 13 years old limit
     });
   }
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
+      // get the id of contact for edition
       this.id = params['id'];
+      // get the contact
       this._contactsService.getContact(this.id).subscribe(
         contact => {
+          // assign contact
           this.contact = contact;
+          // change values of form
           if (this.contact) {
             this.editForm.patchValue({
               name: this.contact.name,
@@ -62,6 +67,7 @@ export class ContactEditPageComponent implements OnInit {
   editContact() {
     this._contactsService.editContact(this.id, this.contact).subscribe(
       response => {
+        // handle response from server
         console.log('Contact updated successfully:', response);
         this._router.navigate(['/home']);
       }

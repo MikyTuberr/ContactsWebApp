@@ -19,9 +19,12 @@ export class ContactPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
+      // get id of contact
       this.id = params['id'];
+      // get the contact
       this._contactsService.getContact(this.id).subscribe(
         contact => {
+          // assign contact
           this.contact = contact;
         }
       );
